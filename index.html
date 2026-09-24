@@ -1,0 +1,1272 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Happy Birthday, [Insert Name] ❤️</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            romantic: ['"Great Vibes"', 'cursive'],
+            elegant: ['"Cormorant Garamond"', 'serif'],
+            modern: ['Montserrat', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: #08030a;
+      color: white;
+      font-family: "Montserrat", sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ================================
+       GLOBAL BACKGROUND
+    ================================= */
+    .romantic-bg {
+      background:
+        radial-gradient(circle at 20% 20%, rgba(244, 114, 182, .20), transparent 30%),
+        radial-gradient(circle at 80% 30%, rgba(251, 191, 36, .12), transparent 30%),
+        radial-gradient(circle at 50% 80%, rgba(168, 85, 247, .18), transparent 35%),
+        linear-gradient(135deg, #100512, #250b20, #08030a);
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .14);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 20px 70px rgba(0,0,0,.35);
+    }
+
+    /* ================================
+       PARTICLES
+    ================================= */
+    .heart {
+      position: fixed;
+      bottom: -50px;
+      pointer-events: none;
+      color: rgba(255, 145, 190, .45);
+      animation: floatHeart linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(.7);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-110vh) rotate(360deg) scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    .glow {
+      text-shadow:
+        0 0 10px rgba(255, 105, 180, .6),
+        0 0 35px rgba(255, 105, 180, .35);
+    }
+
+    /* ================================
+       HERO
+    ================================= */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at center, transparent 10%, rgba(0,0,0,.4) 100%);
+      pointer-events: none;
+    }
+
+    .hero-name {
+      font-size: clamp(4rem, 13vw, 10rem);
+      line-height: .85;
+    }
+
+    .scroll-indicator {
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
+
+    /* ================================
+       TIMELINE
+    ================================= */
+    .timeline {
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        #ec4899,
+        #f9a8d4,
+        #ec4899,
+        transparent
+      );
+    }
+
+    .timeline-item {
+      position: relative;
+      width: 50%;
+      padding: 25px 50px;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      top: 35px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #f472b6;
+      box-shadow: 0 0 25px #f472b6;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-dot {
+      right: -9px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+      left: -9px;
+    }
+
+    /* Polaroid */
+    .polaroid {
+      background: #fff;
+      padding: 10px 10px 18px;
+      transform: rotate(-2deg);
+      transition: .4s ease;
+      color: #222;
+      box-shadow: 0 20px 45px rgba(0,0,0,.4);
+    }
+
+    .polaroid:hover {
+      transform: rotate(0deg) scale(1.04);
+    }
+
+    .polaroid:nth-child(even) {
+      transform: rotate(2deg);
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+    }
+
+    /* ================================
+       ENVELOPE GAME
+    ================================= */
+    .envelope {
+      position: relative;
+      height: 210px;
+      cursor: pointer;
+      perspective: 1000px;
+    }
+
+    .envelope-body {
+      position: absolute;
+      inset: 30px 0 0;
+      background: linear-gradient(135deg, #be185d, #831843);
+      border-radius: 10px;
+      box-shadow: 0 20px 45px rgba(0,0,0,.4);
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 30px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 150px solid transparent;
+      border-right: 150px solid transparent;
+      border-top: 100px solid #f472b6;
+      transform-origin: top;
+      transition: .7s;
+      z-index: 3;
+    }
+
+    .envelope.open .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    .love-message {
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      top: 55px;
+      min-height: 125px;
+      background: #fff7fb;
+      color: #831843;
+      border-radius: 10px;
+      padding: 20px;
+      z-index: 1;
+      transform: translateY(0);
+      transition: .7s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.2rem;
+    }
+
+    .envelope.open .love-message {
+      transform: translateY(-90px);
+      z-index: 5;
+    }
+
+    /* ================================
+       CAKE
+    ================================= */
+    .cake-wrapper {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: auto;
+    }
+
+    .cake {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 240px;
+    }
+
+    .cake-layer {
+      height: 65px;
+      border-radius: 15px;
+      background: linear-gradient(180deg, #f9a8d4, #be185d);
+      border: 3px solid #fce7f3;
+      box-shadow: 0 10px 30px rgba(236,72,153,.35);
+    }
+
+    .cake-middle {
+      width: 210px;
+      margin: auto;
+    }
+
+    .cake-top {
+      width: 180px;
+      margin: auto;
+    }
+
+    .candle {
+      width: 12px;
+      height: 65px;
+      background: linear-gradient(#fff, #f9a8d4);
+      position: absolute;
+      bottom: 225px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .flame {
+      position: absolute;
+      width: 18px;
+      height: 25px;
+      background: #ffd166;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      top: -22px;
+      left: -3px;
+      box-shadow: 0 0 25px #ffd166;
+      animation: flame 0.7s infinite alternate;
+    }
+
+    @keyframes flame {
+      from { transform: rotate(-45deg) scale(1); }
+      to { transform: rotate(-45deg) scale(1.15); }
+    }
+
+    .candle.out .flame {
+      display: none;
+    }
+
+    /* ================================
+       TYPEWRITER
+    ================================= */
+    .letter {
+      min-height: 300px;
+      line-height: 1.9;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.25rem;
+      white-space: pre-wrap;
+    }
+
+    /* ================================
+       YES / NO GAME
+    ================================= */
+    #noBtn {
+      transition: left .25s ease, top .25s ease;
+    }
+
+    /* ================================
+       RESPONSIVE
+    ================================= */
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 15px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(even),
+      .timeline-item:nth-child(odd) {
+        width: 100%;
+        left: 0;
+        text-align: left;
+        padding-left: 50px;
+        padding-right: 15px;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-dot,
+      .timeline-item:nth-child(even) .timeline-dot {
+        left: 6px;
+        right: auto;
+      }
+
+      .envelope-flap {
+        border-left-width: 120px;
+        border-right-width: 120px;
+      }
+    }
+  </style>
+</head>
+
+<body class="romantic-bg">
+
+  <!-- Floating hearts are generated by JavaScript -->
+  <div id="hearts"></div>
+
+  <!-- =========================================================
+       HERO
+       ========================================================= -->
+  <section class="hero px-6 text-center">
+
+    <div class="relative z-10 max-w-5xl">
+
+      <p class="uppercase tracking-[.4em] text-pink-300 text-sm mb-6">
+        Today, the universe celebrates
+      </p>
+
+      <!-- CHANGE HER NAME HERE -->
+      <h1 class="hero-name font-romantic text-pink-200 glow">
+        [Insert Name]
+      </h1>
+
+      <p class="font-elegant text-2xl md:text-4xl mt-8 text-pink-100">
+        The most beautiful chapter of my life ❤️
+      </p>
+
+      <!-- Age / Birthday Counter -->
+      <div class="glass inline-block rounded-3xl px-8 py-5 mt-10">
+        <p class="text-pink-200 text-sm uppercase tracking-widest">
+          Another beautiful year of you
+        </p>
+
+        <div class="text-3xl md:text-5xl font-elegant mt-2">
+          <span id="ageCounter">∞</span>
+          <span class="text-pink-300"> years of making my world brighter</span>
+        </div>
+      </div>
+
+      <!-- Music -->
+      <div class="mt-10">
+        <!--
+          AUDIO:
+          Replace the URL below with your own royalty-free MP3.
+          Example:
+          <audio id="loveSong" src="music/birthday-song.mp3"></audio>
+        -->
+        <audio
+          id="loveSong"
+          loop
+          src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_946f7b4b0d.mp3">
+        </audio>
+
+        <button
+          id="musicBtn"
+          onclick="toggleMusic()"
+          class="glass px-7 py-4 rounded-full hover:bg-pink-500/20 transition">
+          <i class="fa-solid fa-play mr-2"></i>
+          Play Our Song
+        </button>
+      </div>
+
+      <div class="mt-20 scroll-indicator">
+        <i class="fa-solid fa-chevron-down text-pink-300 text-2xl"></i>
+        <p class="text-xs text-pink-200 mt-2">Our story awaits...</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       OUR STORY
+       ========================================================= -->
+  <section id="story" class="py-24 px-6">
+
+    <div class="max-w-6xl mx-auto">
+
+      <div class="text-center mb-20">
+        <p class="uppercase tracking-[.3em] text-pink-300 text-sm">
+          Chapter One
+        </p>
+
+        <h2 class="font-romantic text-6xl md:text-8xl text-pink-200 mt-3">
+          Our Story
+        </h2>
+
+        <p class="text-gray-300 mt-5 max-w-xl mx-auto">
+          Some moments become memories.
+          Some memories become forever.
+        </p>
+      </div>
+
+      <div class="timeline">
+
+        <!-- MEMORY 1 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+
+          <div class="glass rounded-3xl p-6">
+
+            <!-- CHANGE IMAGE URL -->
+            <div class="polaroid mb-6">
+              <img
+                src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800&q=80"
+                alt="Our first memory"
+              />
+
+              <p class="font-romantic text-2xl mt-3">
+                Our beginning ❤️
+              </p>
+            </div>
+
+            <span class="text-pink-300 text-sm">
+              The Beginning
+            </span>
+
+            <h3 class="font-elegant text-3xl mt-2">
+              The First Time We Met
+            </h3>
+
+            <!-- CHANGE MEMORY TEXT -->
+            <p class="text-gray-300 mt-3">
+              I didn't know that meeting you that day would eventually
+              become one of the most important moments of my life.
+            </p>
+          </div>
+        </div>
+
+
+        <!-- MEMORY 2 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+
+          <div class="glass rounded-3xl p-6">
+
+            <div class="polaroid mb-6">
+
+              <!-- CHANGE IMAGE URL -->
+              <img
+                src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80"
+                alt="First date"
+              />
+
+              <p class="font-romantic text-2xl mt-3">
+                Our first date ✨
+              </p>
+            </div>
+
+            <span class="text-pink-300 text-sm">
+              Chapter Two
+            </span>
+
+            <h3 class="font-elegant text-3xl mt-2">
+              Our First Date
+            </h3>
+
+            <p class="text-gray-300 mt-3">
+              <!-- CHANGE THIS MEMORY -->
+              The laughs, the nervous smiles, and that feeling that
+              somehow everything felt exactly right.
+            </p>
+          </div>
+        </div>
+
+
+        <!-- MEMORY 3 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+
+          <div class="glass rounded-3xl p-6">
+
+            <div class="polaroid mb-6">
+
+              <!-- CHANGE IMAGE URL -->
+              <img
+                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+                alt="Our trip"
+              />
+
+              <p class="font-romantic text-2xl mt-3">
+                Our adventure 🌊
+              </p>
+            </div>
+
+            <span class="text-pink-300 text-sm">
+              Adventure
+            </span>
+
+            <h3 class="font-elegant text-3xl mt-2">
+              Our Funniest Trip
+            </h3>
+
+            <p class="text-gray-300 mt-3">
+              <!-- CHANGE THIS MEMORY -->
+              We probably laughed more than we actually planned anything.
+              And honestly, that's what made it perfect.
+            </p>
+          </div>
+        </div>
+
+
+        <!-- MEMORY 4 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+
+          <div class="glass rounded-3xl p-6">
+
+            <div class="polaroid mb-6">
+
+              <!-- CHANGE IMAGE URL -->
+              <img
+                src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80"
+                alt="Favorite memory"
+              />
+
+              <p class="font-romantic text-2xl mt-3">
+                My favorite ❤️
+              </p>
+            </div>
+
+            <span class="text-pink-300 text-sm">
+              Forever
+            </span>
+
+            <h3 class="font-elegant text-3xl mt-2">
+              A Memory I'll Never Forget
+            </h3>
+
+            <p class="text-gray-300 mt-3">
+              <!-- CHANGE THIS MEMORY -->
+              If I could relive one moment with you again,
+              this would be the one.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       REASONS I LOVE YOU
+       ========================================================= -->
+  <section class="py-24 px-6 bg-black/20">
+
+    <div class="max-w-6xl mx-auto">
+
+      <div class="text-center mb-16">
+
+        <p class="uppercase tracking-[.3em] text-pink-300 text-sm">
+          Chapter Two
+        </p>
+
+        <h2 class="font-romantic text-6xl md:text-8xl text-pink-200 mt-3">
+          Why I Love You
+        </h2>
+
+        <p class="text-gray-300 mt-5">
+          Open every envelope. There are five little pieces of my heart inside.
+        </p>
+      </div>
+
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-8">
+
+        <!-- ENVELOPE 1 -->
+        <div
+          class="envelope"
+          onclick="openEnvelope(this)"
+          data-message="Because your smile can completely change the mood of my entire day. ❤️"
+        >
+          <div class="love-message">
+            Click me ❤️
+          </div>
+
+          <div class="envelope-body"></div>
+          <div class="envelope-flap"></div>
+
+          <div class="absolute bottom-2 left-0 right-0 text-center z-10">
+            <i class="fa-solid fa-heart text-white"></i>
+          </div>
+        </div>
+
+
+        <!-- ENVELOPE 2 -->
+        <div
+          class="envelope"
+          onclick="openEnvelope(this)"
+          data-message="Because somehow you make ordinary moments feel like memories worth keeping forever."
+        >
+          <div class="love-message">Click me 💕</div>
+          <div class="envelope-body"></div>
+          <div class="envelope-flap"></div>
+
+          <div class="absolute bottom-2 left-0 right-0 text-center z-10">
+            <i class="fa-solid fa-star text-white"></i>
+          </div>
+        </div>
+
+
+        <!-- ENVELOPE 3 -->
+        <div
+          class="envelope"
+          onclick="openEnvelope(this)"
+          data-message="Because I can be completely myself around you, and somehow you still choose to stay."
+        >
+          <div class="love-message">Click me ✨</div>
+          <div class="envelope-body"></div>
+          <div class="envelope-flap"></div>
+
+          <div class="absolute bottom-2 left-0 right-0 text-center z-10">
+            <i class="fa-solid fa-face-smile text-white"></i>
+          </div>
+        </div>
+
+
+        <!-- ENVELOPE 4 -->
+        <div
+          class="envelope"
+          onclick="openEnvelope(this)"
+          data-message="Because you inspire me to become a better person without ever asking me to change who I am."
+        >
+          <div class="love-message">Click me 🌹</div>
+          <div class="envelope-body"></div>
+          <div class="envelope-flap"></div>
+
+          <div class="absolute bottom-2 left-0 right-0 text-center z-10">
+            <i class="fa-solid fa-rose text-white"></i>
+          </div>
+        </div>
+
+
+        <!-- ENVELOPE 5 -->
+        <div
+          class="envelope"
+          onclick="openEnvelope(this)"
+          data-message="And most importantly... I love you simply because you're you. And that's more than enough for my heart."
+        >
+          <div class="love-message">Last one ❤️</div>
+          <div class="envelope-body"></div>
+          <div class="envelope-flap"></div>
+
+          <div class="absolute bottom-2 left-0 right-0 text-center z-10">
+            <i class="fa-solid fa-infinity text-white"></i>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       BIRTHDAY CAKE
+       ========================================================= -->
+  <section class="py-28 px-6 text-center">
+
+    <p class="uppercase tracking-[.3em] text-pink-300 text-sm">
+      Chapter Three
+    </p>
+
+    <h2 class="font-romantic text-6xl md:text-8xl text-pink-200 mt-3">
+      Make A Wish
+    </h2>
+
+    <p class="text-gray-300 mt-5 mb-10">
+      Click the candles to blow them out. 🕯️
+    </p>
+
+
+    <div class="cake-wrapper">
+
+      <!-- Candle 1 -->
+      <div
+        class="candle"
+        style="left: 85px"
+        onclick="blowCandle(this)"
+      >
+        <div class="flame"></div>
+      </div>
+
+      <!-- Candle 2 -->
+      <div
+        class="candle"
+        style="left: 145px"
+        onclick="blowCandle(this)"
+      >
+        <div class="flame"></div>
+      </div>
+
+      <!-- Candle 3 -->
+      <div
+        class="candle"
+        style="left: 205px"
+        onclick="blowCandle(this)"
+      >
+        <div class="flame"></div>
+      </div>
+
+
+      <div class="cake">
+
+        <div class="cake-layer cake-top"></div>
+        <div class="cake-layer cake-middle"></div>
+        <div class="cake-layer"></div>
+
+      </div>
+
+    </div>
+
+
+    <button
+      onclick="blowAllCandles()"
+      class="glass px-8 py-4 rounded-full text-pink-200 hover:bg-pink-500/20 transition mt-5"
+    >
+      <i class="fa-solid fa-wind mr-2"></i>
+      Blow Out All Candles
+    </button>
+
+  </section>
+
+
+  <!-- =========================================================
+       LOVE LETTER
+       ========================================================= -->
+  <section class="py-28 px-6 bg-black/25">
+
+    <div class="max-w-4xl mx-auto">
+
+      <div class="text-center mb-12">
+
+        <p class="uppercase tracking-[.3em] text-pink-300 text-sm">
+          Final Chapter
+        </p>
+
+        <h2 class="font-romantic text-6xl md:text-8xl text-pink-200 mt-3">
+          A Letter For You
+        </h2>
+
+      </div>
+
+
+      <div class="glass rounded-[2rem] p-7 md:p-12">
+
+        <div class="letter" id="letter"></div>
+
+        <div class="text-right mt-8">
+
+          <p class="font-romantic text-4xl text-pink-300">
+            Forever yours,
+          </p>
+
+          <!-- CHANGE YOUR NAME -->
+          <p class="font-elegant text-xl text-pink-100 mt-2">
+            [Your Name] ❤️
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       YES / NO GAME
+       ========================================================= -->
+  <section class="min-h-[70vh] flex items-center justify-center px-6 text-center">
+
+    <div class="max-w-3xl">
+
+      <i class="fa-solid fa-heart text-pink-400 text-5xl mb-8"></i>
+
+      <h2 class="font-elegant text-4xl md:text-6xl">
+        One last question...
+      </h2>
+
+      <p class="font-romantic text-5xl md:text-7xl text-pink-300 mt-8">
+        Will you love me forever?
+      </p>
+
+
+      <div class="relative flex justify-center gap-5 mt-12 min-h-[100px]">
+
+        <button
+          onclick="yesClicked()"
+          class="bg-pink-500 hover:bg-pink-400 px-10 py-4 rounded-full font-semibold shadow-lg shadow-pink-500/30 transition"
+        >
+          YES ❤️
+        </button>
+
+
+        <button
+          id="noBtn"
+          class="glass px-10 py-4 rounded-full font-semibold absolute"
+          style="margin-left: 230px"
+          onmouseenter="runAway()"
+        >
+          NO 😏
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="text-center py-10 border-t border-white/10">
+
+    <p class="font-romantic text-4xl text-pink-300">
+      Made with all my heart ❤️
+    </p>
+
+    <p class="text-gray-500 text-xs mt-3">
+      Happy Birthday, [Insert Name] ✨
+    </p>
+
+  </footer>
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
+  <script>
+
+    /* ================================================
+       FLOATING HEARTS
+    ================================================= */
+
+    const heartsContainer = document.getElementById("hearts");
+
+    function createHeart() {
+
+      const heart = document.createElement("div");
+
+      heart.className = "heart";
+      heart.innerHTML = "❤";
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (10 + Math.random() * 25) + "px";
+      heart.style.animationDuration = (8 + Math.random() * 12) + "s";
+      heart.style.animationDelay = Math.random() * 5 + "s";
+
+      heartsContainer.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 20000);
+    }
+
+    setInterval(createHeart, 600);
+
+
+
+    /* ================================================
+       AGE COUNTER
+       
+       CHANGE BIRTHDAY BELOW
+       Format: YYYY-MM-DD
+    ================================================= */
+
+    const birthday = new Date("1999-09-24");
+
+    function calculateAge() {
+
+      const today = new Date();
+
+      let age = today.getFullYear() - birthday.getFullYear();
+
+      const monthDifference =
+        today.getMonth() - birthday.getMonth();
+
+      if (
+        monthDifference < 0 ||
+        (
+          monthDifference === 0 &&
+          today.getDate() < birthday.getDate()
+        )
+      ) {
+        age--;
+      }
+
+      document.getElementById("ageCounter").textContent = age;
+    }
+
+    calculateAge();
+
+
+
+    /* ================================================
+       MUSIC
+    ================================================= */
+
+    const loveSong = document.getElementById("loveSong");
+    const musicBtn = document.getElementById("musicBtn");
+
+    function toggleMusic() {
+
+      if (loveSong.paused) {
+
+        loveSong.play();
+
+        musicBtn.innerHTML =
+          '<i class="fa-solid fa-pause mr-2"></i> Pause Our Song';
+
+      } else {
+
+        loveSong.pause();
+
+        musicBtn.innerHTML =
+          '<i class="fa-solid fa-play mr-2"></i> Play Our Song';
+
+      }
+    }
+
+
+
+    /* ================================================
+       LOVE ENVELOPES
+    ================================================= */
+
+    function openEnvelope(envelope) {
+
+      const message =
+        envelope.getAttribute("data-message");
+
+      envelope.classList.toggle("open");
+
+      const messageBox =
+        envelope.querySelector(".love-message");
+
+      if (envelope.classList.contains("open")) {
+        messageBox.textContent = message;
+      } else {
+        messageBox.textContent = "Open me ❤️";
+      }
+    }
+
+
+
+    /* ================================================
+       CAKE / CANDLES
+    ================================================= */
+
+    let blownCandles = 0;
+
+    function blowCandle(candle) {
+
+      if (candle.classList.contains("out")) return;
+
+      candle.classList.add("out");
+
+      blownCandles++;
+
+      if (blownCandles >= 3) {
+        celebrate();
+      }
+    }
+
+
+    function blowAllCandles() {
+
+      document.querySelectorAll(".candle")
+        .forEach(candle => {
+          candle.classList.add("out");
+        });
+
+      blownCandles = 3;
+
+      celebrate();
+    }
+
+
+    function celebrate() {
+
+      // Confetti explosion
+      confetti({
+        particleCount: 180,
+        spread: 100,
+        origin: {
+          y: .65
+        }
+      });
+
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: {
+          x: .2,
+          y: .6
+        }
+      });
+
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: {
+          x: .8,
+          y: .6
+        }
+      });
+
+      setTimeout(() => {
+
+        alert(
+          "✨ Make a wish, birthday girl! ✨\n\n" +
+          "And I hope one day every beautiful wish in your heart comes true. ❤️"
+        );
+
+      }, 600);
+    }
+
+
+
+    /* ================================================
+       LOVE LETTER TYPEWRITER
+       
+       CHANGE THE LETTER BELOW
+    ================================================= */
+
+    const letterText = `
+My love,
+
+Today isn't just another birthday.
+
+Today is the day the world became a little more beautiful because you came into it.
+
+I don't know if words will ever be enough to explain what you mean to me, but I want to try anyway.
+
+Thank you for every smile, every conversation, every silly moment, every argument we survived, every memory we created, and every little moment that somehow became special simply because you were there.
+
+You have become one of the most beautiful parts of my life.
+
+I love the way you laugh.
+I love the way you care.
+I love the little things you do that you probably don't even realize I notice.
+
+And if I could give you one thing today, I wouldn't give you something wrapped in a box.
+
+I'd give you the ability to see yourself through my eyes for just one moment.
+
+Then you'd understand just how incredibly special you are to me.
+
+On your birthday, I wish you happiness that stays, dreams that come true, and a life filled with moments that make your heart smile.
+
+And selfishly...
+
+I hope I get to be there for many of those moments.
+
+Happy Birthday, my love.
+
+No matter how many birthdays come,
+I hope we keep finding reasons to laugh,
+places to explore,
+memories to create,
+and reasons to choose each other.
+
+You are my favorite person,
+my favorite memory,
+and hopefully...
+my favorite forever.
+
+Happy Birthday, [Insert Name]. ❤️
+`;
+
+    const letterElement =
+      document.getElementById("letter");
+
+    let letterIndex = 0;
+
+    function typeLetter() {
+
+      if (letterIndex < letterText.length) {
+
+        letterElement.textContent +=
+          letterText.charAt(letterIndex);
+
+        letterIndex++;
+
+        setTimeout(typeLetter, 25);
+      }
+    }
+
+
+    // Start typewriter when letter enters screen
+    const letterObserver =
+      new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            if (letterIndex === 0) {
+              typeLetter();
+            }
+
+          }
+
+        });
+
+      }, {
+        threshold: .3
+      });
+
+    letterObserver.observe(letterElement);
+
+
+
+    /* ================================================
+       YES / NO GAME
+    ================================================= */
+
+    function runAway() {
+
+      const button =
+        document.getElementById("noBtn");
+
+      const maxX =
+        window.innerWidth < 600 ? 100 : 300;
+
+      const maxY = 100;
+
+      const x =
+        (Math.random() * maxX) -
+        (maxX / 2);
+
+      const y =
+        (Math.random() * maxY) -
+        (maxY / 2);
+
+      button.style.transform =
+        `translate(${x}px, ${y}px)`;
+    }
+
+
+    function yesClicked() {
+
+      confetti({
+        particleCount: 250,
+        spread: 120,
+        origin: {
+          y: .6
+        }
+      });
+
+      setTimeout(() => {
+
+        alert(
+          "I knew it! ❤️\n\n" +
+          "Okay then... it's officially forever. ♾️💕"
+        );
+
+      }, 300);
+    }
+
+
+  </script>
+
+</body>
+</html>
+```
